@@ -111,7 +111,7 @@ class GenericDataLoader:
         
         num_lines = sum(1 for i in open(self.corpus_file, 'rb'))
         with open(self.corpus_file, encoding='utf8') as fIn:
-            for line_num, line in enumerate(tqdm(fIn, total=num_lines)):
+            for line in tqdm(fIn, total=num_lines):
                 line = json.loads(line)
                 doc_id = line.get("_id")
                 if doc_id in self.queries:
@@ -124,7 +124,7 @@ class GenericDataLoader:
     def _load_queries(self):
         k = self.k
         with open(self.query_file, encoding='utf8') as fIn:
-            for line_num, line in fIn:
+            for line_num, line in enumerate(fIn):
                 if line_num >= k: # Check if we have reached the 1st-k limit
                     break
                 line = json.loads(line)
