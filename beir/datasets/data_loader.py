@@ -21,6 +21,7 @@ class GenericDataLoader:
         self.corpus = {}
         self.queries = {}
         self.qrels = {}
+        self.k = split_index
         
         if prefix:
             query_file = prefix + "-" + query_file
@@ -120,8 +121,8 @@ class GenericDataLoader:
                 else:
                     pass
     
-    def _load_queries(self, k):
-        
+    def _load_queries(self):
+        k = self.k
         with open(self.query_file, encoding='utf8') as fIn:
             for line_num, line in fIn:
                 if line_num >= k: # Check if we have reached the 1st-k limit
