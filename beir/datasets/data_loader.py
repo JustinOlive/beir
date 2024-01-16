@@ -122,13 +122,14 @@ class GenericDataLoader:
                     pass
     
     def _load_queries(self):
-        k = self.k
+        counter = 0
         with open(self.query_file, encoding='utf8') as fIn:
-            for line_num, line in enumerate(fIn):
-                if line_num >= k: # Check if we have reached the 1st-k limit
+            for line in fIn:
+                if counter >= self.k: # Check if we have reached the 1st-k limit
                     break
                 line = json.loads(line)
                 self.queries[line.get("_id")] = line.get("text")
+                counter += 1
         
     def _load_qrels(self):
         
