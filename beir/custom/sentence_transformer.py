@@ -2,6 +2,7 @@ import torch.multiprocessing as multiprocessing
 import logging
 from torch import Tensor
 logger = logging.getLogger(__name__)
+from typing import List, Dict, Union, Tuple
 
 class SentenceTransformerModel:
     def __init__(self, embed_model,  sep = " ",   **kwargs):
